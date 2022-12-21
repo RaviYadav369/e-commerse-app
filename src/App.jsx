@@ -1,9 +1,9 @@
 import './App.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
-import Layout from '../components/Layout'
-import Login from '../page/Login'
-import Home from '../page/Home'
-import Cart from '../page/Card'
+import Layout from './components/Layout'
+import Login from './page/Login'
+import Home from './page/Home'
+import Cart from './page/Card'
 
 
 const router = createBrowserRouter(
