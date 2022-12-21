@@ -1,0 +1,26 @@
+import React from 'react'
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
+import Header from './Header'
+import { Outlet } from 'react-router-dom'
+
+
+const theme = createTheme({
+    palette: {
+        mode: "light"
+    }
+})
+
+const Layout = () => {
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Header />
+          <main>
+            <Outlet></Outlet>
+          </main>
+            <footer></footer>
+        </ThemeProvider>
+    )
+}
+
+export default Layout
