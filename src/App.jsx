@@ -4,6 +4,8 @@ import Layout from './components/Layout'
 import Login from './page/Login'
 import Home from './page/Home'
 import Cart from './page/Card'
+import { Provider } from 'react-redux'
+import {store} from "./store"
 
 
 const router = createBrowserRouter(
@@ -19,7 +21,10 @@ const router = createBrowserRouter(
 function App() {
 
   return (
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+
+    </Provider>
   )
 }
 
