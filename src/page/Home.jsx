@@ -19,28 +19,21 @@ import { useSearchParams } from "react-router-dom";
 export default function Home() {
   const theme = useTheme();
   const dispatch = useDispatch()
-  
+
   const state = useSelector((state) => state.products)
-  const {value:products,loading} = state ?? {}
-  const {searchParams} = useSearchParams()
+  const { value: products, loading } = state ?? {}
+  const [searchParams] = useSearchParams()
   const category = searchParams.get("category")
 
-  // const response = async () => {
-  //   let result = await fetch("https://fakestoreapi.com/products");
-  //   result = await result.json();
-  //   console.log(result);
-  //   setproducts(result);
-  // };
-
-if(!products.length){
-  dispatch(fetchAllProducts())
-}
-
-  function addProductToCart(product){
-    dispatch(addToCart({product, quantity:1}))
+  if (!products?.length) {
+    dispatch(fetchAllProducts())
   }
-  let filteredProducts = category && category !== "all"? products.filter(prod=>prod.category === category):products;
 
+  function addProductToCart(product) {
+    dispatch(addToCart({ product, quantity: 1 }))
+  }
+  let filteredProducts = category && category !== "all" ? products.filter(prod => prod.category === category) : products;
+console.log(filteredProducts);
 
   return (
     <Container sx={{ py: 8 }} maxWidth="lg">
@@ -71,8 +64,8 @@ if(!products.length){
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     display: "-webkit-box",
-                    "-webkit-line-clamp": "1",
-                    "-webkit-box-orient": "vertical",
+                    "WebkitLineClamp": "1",
+                    "WebkitBoxOrient": "vertical",
                   }}
                 >
 
@@ -82,8 +75,8 @@ if(!products.length){
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   display: "-webkit-box",
-                  "-webkit-line-clamp": "2",
-                  "-webkit-box-orient": "vertical",
+                  "WebkitLineClamp": "2",
+                  "WebkitBoxOrient": "vertical",
                 }}>{description}</Typography>
                 <Typography>{price}</Typography>
                 <Rating readOnly precision={0.5} value={rating.rate} />
@@ -94,7 +87,7 @@ if(!products.length){
                   alignSelf: "center",
                 }}
               >
-                <Button variant="contained" onClick={()=> addProductToCart({ title, id, price, description, rating, image })} >
+                <Button variant="contained" onClick={() => addProductToCart({ title, id, price, description, rating, image })} >
                   <ShoppingCartSharp />
                   Add to cart
                 </Button>

@@ -16,7 +16,7 @@ const Layout = () => {
             <CssBaseline />
             <Header />
           <main>
-            <Outlet></Outlet>
+            <Outlet />
           </main>
             <footer></footer>
         </ThemeProvider>
