@@ -3,7 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Layout from './components/Layout'
 import Login from './page/Login'
 import Home from './page/Home'
-import Cart from './page/Card'
+import Cart from './page/Cart'
 import { Provider } from 'react-redux'
 import {store} from "./store"
 

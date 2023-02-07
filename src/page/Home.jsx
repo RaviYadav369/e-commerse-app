@@ -24,6 +24,7 @@ export default function Home() {
   const { value: products, loading } = state ?? {}
   const [searchParams] = useSearchParams()
   const category = searchParams.get("category")
+  const searchTerm = searchParams.get("searchterm");
 
   if (!products?.length) {
     dispatch(fetchAllProducts())
@@ -32,8 +33,12 @@ export default function Home() {
   function addProductToCart(product) {
     dispatch(addToCart({ product, quantity: 1 }))
   }
-  let filteredProducts = category && category !== "all" ? products.filter(prod => prod.category === category) : products;
-console.log(filteredProducts);
+  let filteredProducts =
+    category && category !== "all" ? products.filter((prod) => prod.category === category) : products;
+
+  filteredProducts = searchTerm
+    ? filteredProducts.filter((prod) => prod.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    : filteredProducts;
 
   return (
     <Container sx={{ py: 8 }} maxWidth="lg">
@@ -41,7 +46,7 @@ console.log(filteredProducts);
         {filteredProducts?.map(({ title, id, price, description, rating, image }) => (
           <Grid item key={id} xs={12} sm={6} md={3}>
             <Card
-              sm={{ heught: "100%", dispaly: "flex", flexDirection: "column" }}
+              sm={{ heught: "100%", dispaly: "flex", flexDirection: "column", padding:theme.spacing(2,0) }}
             >
               <CardContent
                 component="img"

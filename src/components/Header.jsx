@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItemCount } from "../utils";
 import { styled, alpha } from "@mui/system";
 import { fetchAllCategories } from "../feature/categories-slice";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams,Link } from "react-router-dom";
 
 const SearchIconWrapper = styled("section")(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -54,6 +54,14 @@ const Search = styled("section")(({ theme }) => ({
     marginLeft: 0,
     width: "100%"
 }))
+
+const StyleLink = styled(Link)(({theme}) => ({
+    color:theme.palette.common.white,
+    textDecoration:"none",
+}))
+
+
+
 function SearchBar() {
     const theme = useTheme();
     const products = useSelector((state) => state.products?.value)
@@ -167,17 +175,27 @@ export default function Header() {
     const cartItems = useSelector((state) => state.cart?.value)
     const count = getItemCount(cartItems)
     console.log(count);
+
+     const navigate = useNavigate();
+     function navigateToCart(){
+        navigate("/cart");
+     }
+
     return (
-        <AppBar position="sticky">
-            <Toolbar>
+        <AppBar position="sticky" sx={{py:1}}>
+            <Toolbar sx={{display:"flex", gap:"2"}} >
                 <Typography
                     variant="h6"
                     color="inherit"
-                >E-Comm</Typography>
+                >
+                    <StyleLink to='/'>
+                    E-comm
+                    </StyleLink>
+                </Typography>
                 <SearchBar />
                 <Box sx={{ display: { md: "flex" } }}>
 
-                    <IconButton size="large" aria-label="shows cart items count" color="inherit" >
+                    <IconButton onClick={navigateToCart} size="large" aria-label="shows cart items count" color="inherit" >
                         <Badge badgeContent={count} color="error">
                             <ShoppingCartSharp />
 
